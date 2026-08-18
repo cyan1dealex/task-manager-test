@@ -1,0 +1,103 @@
+.card {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 16px;
+	background-color: var(--color-bg-card);
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-lg);
+	gap: 16px;
+	transition:
+		border-color var(--transition-duration) ease,
+		box-shadow var(--transition-duration) ease;
+}
+
+.card:hover {
+	border-color: #cbd5e1;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+}
+
+.cardDone {
+	opacity: 0.6;
+	background-color: var(--color-bg-subtle);
+}
+
+.left {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	flex: 1;
+	min-width: 0;
+}
+
+.checkboxContainer {
+	padding-top: 2px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.title {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--color-text-main);
+	line-height: 1.4;
+	word-break: break-word;
+}
+
+.titleDone {
+	text-decoration: line-through;
+	color: var(--color-text-subtle);
+}
+
+.description {
+	font-size: 13px;
+	color: var(--color-text-subtle);
+	line-height: 1.4;
+	word-break: break-word;
+}
+
+.right {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-shrink: 0;
+}
+
+.priorityBadge {
+	font-size: 12px;
+	font-weight: 600;
+	padding: 3px 10px;
+	border-radius: var(--border-radius-full);
+	text-transform: capitalize;
+}
+
+.priorityHigh {
+	background-color: var(--color-priority-high-bg);
+	color: var(--color-priority-high-text);
+}
+
+.priorityMedium {
+	background-color: var(--color-priority-med-bg);
+	color: var(--color-priority-med-text);
+}
+
+.priorityLow {
+	background-color: var(--color-priority-low-bg);
+	color: var(--color-priority-low-text);
+}
+
+.date {
+	font-size: 12px;
+	color: var(--color-text-muted);
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}

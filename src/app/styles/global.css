@@ -13,8 +13,9 @@ body {
 	line-height: 1.5;
 	color: var(--color-text-main);
 	background-color: var(--color-bg-page);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+
+	scrollbar-color: var(--color-accent);
+	scrollbar-width: thin;
 }
 
 a,
@@ -24,6 +25,25 @@ input,
 textarea {
 	color: inherit;
 	font-family: inherit;
+	outline: none;
+	text-decoration: none;
+}
+
+button {
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
 }
 
 .visually-hidden {
@@ -37,4 +57,10 @@ textarea {
 	clip-path: inset(100%);
 	clip: rect(0 0 0 0);
 	overflow: hidden;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }

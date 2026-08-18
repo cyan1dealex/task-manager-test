@@ -1,5 +1,7 @@
 import React from 'react'
+import { TaskList } from '@widgets/TaskList/ui/TaskList'
 import styles from './MainPage.module.css'
+import { TaskCreateForm } from '@features/CreateTask'
 
 export const MainPage: React.FC = () => {
 	return (
@@ -15,14 +17,16 @@ export const MainPage: React.FC = () => {
 
 				<main className={styles.main}>
 					<section className={styles.section}>
-						{/* QuickTaskCreateForm */}
+						<TaskCreateForm />
 					</section>
 
 					<section className={styles.section}>
 						{/* TaskControlToolbar */}
 					</section>
 
-					<section className={styles.section}>{/* TaskList */}</section>
+					<section className={styles.section}>
+						<TaskList />
+					</section>
 
 					<footer className={styles.section}>{/* TaskPagination */}</footer>
 				</main>

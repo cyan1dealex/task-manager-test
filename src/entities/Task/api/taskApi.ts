@@ -1,0 +1,23 @@
+import { baseApi } from '@shared/api/baseApi'
+import { Task, TaskQueryParams } from '../model/types'
+
+export const taskApi = {
+	getTasks: async (params: TaskQueryParams = {}): Promise<Task[]> => {
+		const response = await baseApi.get<Task[]>('/tasks', {
+			params: {
+				_sort: 'createdAt',
+				_order: 'desc',
+				...params,
+			},
+		})
+		return response.data
+	},
+
+	createTask: async (task: Omit<Task, 'id' | 'createdAt'>): Promise<Task> => {
+		const response = await baseApi.post<Task>('/tasks', {
+			...task,
+			createdAt: new Date().toISOString(),
+		})
+		return response.data
+	},
+}

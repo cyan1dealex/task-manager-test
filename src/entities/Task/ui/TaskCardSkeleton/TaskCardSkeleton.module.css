@@ -1,0 +1,67 @@
+.skeletonCard {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	background-color: var(--color-bg-card);
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-md);
+	gap: 16px;
+}
+
+.left {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex: 1;
+}
+
+.checkbox {
+	width: 20px;
+	height: 20px;
+	border-radius: var(--border-radius-full);
+	background-color: var(--color-bg-muted);
+	flex-shrink: 0;
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 60%;
+}
+
+.title {
+	height: 16px;
+	width: 70%;
+	background-color: var(--color-bg-muted);
+	border-radius: var(--border-radius-sm);
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+.desc {
+	height: 12px;
+	width: 90%;
+	background-color: var(--color-bg-muted);
+	border-radius: var(--border-radius-sm);
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+.badge {
+	width: 64px;
+	height: 24px;
+	border-radius: var(--border-radius-full);
+	background-color: var(--color-bg-muted);
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
