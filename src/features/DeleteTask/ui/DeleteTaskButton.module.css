@@ -1,0 +1,20 @@
+.button {
+	width: 32px;
+	height: 32px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--border-radius-md);
+	color: var(--color-text-subtle);
+	transition: all var(--transition-duration) ease;
+}
+
+.button:hover {
+	color: var(--color-priority-high-text);
+	background-color: var(--color-priority-high-bg);
+}
+
+.icon {
+	width: 16px;
+	height: 16px;
+}

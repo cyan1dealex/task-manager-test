@@ -5,6 +5,9 @@ import {
 	TaskCardSkeleton,
 	TaskQueryParams,
 } from '@entities/Task'
+import { ToggleTaskCheckbox } from '@features/ToggleTask'
+import { DeleteTaskButton } from '@features/DeleteTask'
+import { EditTaskModal } from '@features/EditTask'
 import styles from './TaskList.module.css'
 
 interface TaskListProps {
@@ -51,7 +54,17 @@ export const TaskList: React.FC<TaskListProps> = ({ queryParams = {} }) => {
 	return (
 		<div className={styles.list}>
 			{tasks.map(task => (
-				<TaskCard key={task.id} task={task} />
+				<TaskCard
+					key={task.id}
+					task={task}
+					checkboxSlot={<ToggleTaskCheckbox task={task} />}
+					actionsSlot={
+						<>
+							<EditTaskModal task={task} />
+							<DeleteTaskButton taskId={task.id} />
+						</>
+					}
+				/>
 			))}
 		</div>
 	)

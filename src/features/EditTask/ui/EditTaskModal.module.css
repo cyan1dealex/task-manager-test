@@ -1,0 +1,108 @@
+.overlay {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(2px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	z-index: 50;
+}
+
+.modal {
+	background-color: var(--color-bg-card);
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-lg);
+	box-shadow:
+		0 10px 25px -5px rgba(0, 0, 0, 0.1),
+		0 8px 10px -6px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 480px;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--color-text-main);
+}
+
+.closeButton {
+	color: var(--color-text-subtle);
+	padding: 4px;
+	border-radius: var(--border-radius-sm);
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.input,
+.textarea,
+.select {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-md);
+	background-color: var(--color-bg-card);
+	font-size: 14px;
+	color: var(--color-text-main);
+}
+
+.textarea {
+	min-height: 80px;
+	resize: vertical;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.cancelButton {
+	padding: 8px 16px;
+	border-radius: var(--border-radius-md);
+	border: 1px solid var(--color-border);
+	background-color: transparent;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.saveButton {
+	padding: 8px 16px;
+	border-radius: var(--border-radius-md);
+	background-color: var(--color-accent);
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.triggerButton {
+	width: 32px;
+	height: 32px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--border-radius-md);
+	color: var(--color-text-subtle);
+	transition: all var(--transition-duration) ease;
+}
+
+.triggerButton:hover {
+	color: var(--color-text-main);
+	background-color: var(--color-bg-muted);
+}
