@@ -1,0 +1,91 @@
+.toolbar {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 100%;
+}
+
+.topRow {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.searchWrapper {
+	flex: 1;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.searchIcon {
+	position: absolute;
+	left: 12px;
+	width: 16px;
+	height: 16px;
+	color: var(--color-text-subtle);
+	pointer-events: none;
+}
+
+.searchInput {
+	width: 100%;
+	height: 38px;
+	padding: 0 12px 0 36px;
+	background-color: var(--color-bg-card);
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-md);
+	font-size: 14px;
+	color: var(--color-text-main);
+	transition: border-color var(--transition-duration) ease;
+}
+
+.searchInput:focus {
+	border-color: var(--color-accent);
+	outline: none;
+}
+
+.sortSelect {
+	height: 38px;
+	padding: 0 12px;
+	background-color: var(--color-bg-card);
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-md);
+	font-size: 13px;
+	color: var(--color-text-main);
+	cursor: pointer;
+	border-color: var(--color-border);
+}
+
+.filtersRow {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.filterTab {
+	padding: 6px 14px;
+	border-radius: var(--border-radius-full);
+	border: 1px solid var(--color-border);
+	background-color: var(--color-bg-card);
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--color-text-subtle);
+	cursor: pointer;
+	transition: all var(--transition-duration) ease;
+}
+
+.filterTab:hover {
+	color: var(--color-text-main);
+	border-color: var(--color-text-subtle);
+}
+
+.filterTabActive {
+	background-color: var(--color-accent);
+	color: #ffffff;
+	border-color: var(--color-accent);
+}
+
+.filterTabActive:hover {
+	color: #ffffff;
+	opacity: 0.95;
+}

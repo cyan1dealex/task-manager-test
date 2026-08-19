@@ -13,7 +13,7 @@ export interface Task {
 
 export interface TaskQueryParams {
 	status?: TaskStatus
-	q?: string
+	title_like?: string
 	_page?: number
 	_limit?: number
 	_sort?: string

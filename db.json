@@ -3,50 +3,26 @@
     {
       "id": "1",
       "title": "Task #1",
-      "description": "Somes description for Task #1...",
-      "status": "done",
+      "description": "Some description for Task #1...",
+      "status": "todo",
       "priority": "high",
       "createdAt": "2026-08-18T08:00:00.000Z"
     },
     {
       "id": "2",
       "title": "Task #2",
-      "description": "Somes description for Task #2...",
-      "status": "done",
+      "description": "Some description for Task #2...",
+      "status": "todo",
       "priority": "high",
       "createdAt": "2026-08-18T08:00:00.000Z"
     },
     {
       "id": "3",
       "title": "Task #3",
-      "description": "Somes description for Task #3...",
+      "description": "Some description for Task #3...",
       "status": "todo",
       "priority": "medium",
       "createdAt": "2026-08-18T10:15:00.000Z"
-    },
-    {
-      "title": "123",
-      "description": "",
-      "status": "done",
-      "priority": "low",
-      "createdAt": "2026-08-18T13:26:47.540Z",
-      "id": "34gJF2_"
-    },
-    {
-      "title": "12345",
-      "description": "",
-      "status": "done",
-      "priority": "medium",
-      "createdAt": "2026-08-18T13:26:51.050Z",
-      "id": "C86E42K"
-    },
-    {
-      "title": "13244",
-      "description": "",
-      "status": "done",
-      "priority": "high",
-      "createdAt": "2026-08-18T13:26:55.081Z",
-      "id": "Ar_tiq-"
     }
   ]
 }
