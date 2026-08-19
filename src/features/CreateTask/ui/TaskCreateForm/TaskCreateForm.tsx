@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { TaskPriority } from '@entities/Task'
 import { useCreateTask } from '@features/CreateTask/model/useCreateTask'
 import styles from './TaskCreateForm.module.css'
@@ -6,14 +6,22 @@ import styles from './TaskCreateForm.module.css'
 export const TaskCreateForm: React.FC = () => {
 	const [title, setTitle] = useState('')
 	const [priority, setPriority] = useState<TaskPriority>('medium')
+	const [isSubmitted, setIsSubmitted] = useState(false)
+	const inputRef = useRef<HTMLInputElement>(null)
 
 	const { mutate: createTask, isPending } = useCreateTask()
 
+	useEffect(() => {
+		if (isSubmitted && !isPending) {
+			inputRef.current?.focus()
+			setIsSubmitted(false)
+		}
+	}, [isSubmitted, isPending])
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
-
 		const trimmedTitle = title.trim()
-		if (!trimmedTitle) return
+		if (!trimmedTitle || isPending) return
 
 		createTask(
 			{
@@ -25,6 +33,7 @@ export const TaskCreateForm: React.FC = () => {
 			{
 				onSuccess: () => {
 					setTitle('')
+					setIsSubmitted(true)
 				},
 			},
 		)
@@ -33,6 +42,7 @@ export const TaskCreateForm: React.FC = () => {
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
 			<input
+				ref={inputRef}
 				type='text'
 				className={styles.input}
 				placeholder='Добавить новую задачу...'

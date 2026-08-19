@@ -1,52 +1,41 @@
 import React from 'react'
-import {
-	useTasksQuery,
-	TaskCard,
-	TaskCardSkeleton,
-	TaskQueryParams,
-} from '@entities/Task'
+import { Task, TaskCard } from '@entities/Task'
 import { ToggleTaskCheckbox } from '@features/ToggleTask'
 import { DeleteTaskButton } from '@features/DeleteTask'
 import { EditTaskModal } from '@features/EditTask'
 import styles from './TaskList.module.css'
 
 interface TaskListProps {
-	queryParams?: TaskQueryParams
+	tasks: Task[]
+	isLoading: boolean
+	isError: boolean
+	error: Error | null
 }
 
-export const TaskList: React.FC<TaskListProps> = ({ queryParams = {} }) => {
-	const { data: tasks, isLoading, isError, error } = useTasksQuery(queryParams)
-
+export const TaskList: React.FC<TaskListProps> = ({
+	tasks,
+	isLoading,
+	isError,
+	error,
+}) => {
 	if (isLoading) {
-		return (
-			<div className={styles.list}>
-				{Array.from({ length: 4 }).map((_, index) => (
-					<TaskCardSkeleton key={index} />
-				))}
-			</div>
-		)
+		return <div className={styles.loadingState}>Загрузка...</div>
 	}
 
 	if (isError) {
 		return (
 			<div className={styles.errorState}>
-				<p className={styles.errorText}>Не удалось загрузить задачи</p>
-				<span className={styles.emptySubtitle}>
-					{error instanceof Error
-						? error.message
-						: 'Проверьте соединение с сервером'}
-				</span>
+				<p className={styles.errorText}>
+					Ошибка загрузки: {error?.message || 'Не удалось получить задачи'}
+				</p>
 			</div>
 		)
 	}
 
-	if (!tasks || tasks.length === 0) {
+	if (!tasks.length) {
 		return (
 			<div className={styles.emptyState}>
-				<p className={styles.emptyTitle}>Задач пока нет</p>
-				<span className={styles.emptySubtitle}>
-					Создайте новую задачу с помощью формы выше
-				</span>
+				<p className={styles.emptyText}>Задач пока нет</p>
 			</div>
 		)
 	}
@@ -59,10 +48,10 @@ export const TaskList: React.FC<TaskListProps> = ({ queryParams = {} }) => {
 					task={task}
 					checkboxSlot={<ToggleTaskCheckbox task={task} />}
 					actionsSlot={
-						<>
+						<div className={styles.actions}>
 							<EditTaskModal task={task} />
 							<DeleteTaskButton taskId={task.id} />
-						</>
+						</div>
 					}
 				/>
 			))}

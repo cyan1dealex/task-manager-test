@@ -68,7 +68,8 @@ export const TaskControlToolbar: React.FC<TaskControlToolbarProps> = ({
 				>
 					<option value='createdAt_desc'>Сначала новые</option>
 					<option value='createdAt_asc'>Сначала старые</option>
-					<option value='priority_desc'>Высокий приоритет</option>
+					<option value='priority_desc'>Сначала высокий приоритет</option>
+					<option value='priority_asc'>Сначала низкий приоритет</option>
 				</select>
 			</div>
 
