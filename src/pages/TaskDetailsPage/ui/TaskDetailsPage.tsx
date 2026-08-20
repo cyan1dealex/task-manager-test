@@ -6,12 +6,6 @@ import { DeleteTaskButton } from '@features/DeleteTask'
 import { useToggleTask } from '@features/ToggleTask'
 import styles from './TaskDetailsPage.module.css'
 
-const STATUS_LABELS: Record<TaskStatus, string> = {
-	todo: 'К выполнению',
-	in_progress: 'В процессе',
-	done: 'Выполнено',
-}
-
 const PRIORITY_LABELS = {
 	low: 'Низкий',
 	medium: 'Средний',
