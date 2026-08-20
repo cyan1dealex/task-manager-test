@@ -1,31 +1,39 @@
 import { baseApi } from '@shared/api/baseApi'
 import { Task, TaskQueryParams } from '../model/types'
+import axios from 'axios'
 
 export const taskApi = {
-	getTasks: async (params?: TaskQueryParams) => {
-		const cleanParams: Record<string, string | number> = {}
+	getTasks: async (params?: TaskQueryParams): Promise<Task[]> => {
+		try {
+			const cleanParams: Record<string, string | number> = {}
 
-		if (params?.status && params.status !== 'all') {
-			cleanParams.status = params.status
+			if (params?.status && params.status !== 'all') {
+				cleanParams.status = params.status
+			}
+
+			if (params?.search && params.search.trim() !== '') {
+				cleanParams.title = params.search.trim()
+			}
+
+			if (params?.sortBy) {
+				cleanParams.sortBy = params.sortBy
+				cleanParams.order = params.order || 'desc'
+			}
+
+			if (params?.page) cleanParams.page = params.page
+			if (params?.limit) cleanParams.limit = params.limit
+
+			const response = await baseApi.get<Task[]>('/tasks', {
+				params: cleanParams,
+			})
+
+			return Array.isArray(response.data) ? response.data : []
+		} catch (error) {
+			if (axios.isAxiosError(error) && error.response?.status === 404) {
+				return []
+			}
+			throw error
 		}
-
-		if (params?.search && params.search.trim() !== '') {
-			cleanParams.title = params.search.trim()
-		}
-
-		if (params?.sortBy) {
-			cleanParams.sortBy = params.sortBy
-			cleanParams.order = params.order || 'desc'
-		}
-
-		if (params?.page) cleanParams.page = params.page
-		if (params?.limit) cleanParams.limit = params.limit
-
-		const response = await baseApi.get<Task[]>('/tasks', {
-			params: cleanParams,
-		})
-
-		return response.data
 	},
 
 	getTaskById: async (id: string): Promise<Task> => {
