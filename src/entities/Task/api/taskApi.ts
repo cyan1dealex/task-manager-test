@@ -1,5 +1,5 @@
 import { baseApi } from '@shared/api/baseApi'
-import { Task, TaskQueryParams } from '../model/types'
+import { Task } from '../model/types'
 
 export const taskApi = {
 	getTasks: async (params?: {
