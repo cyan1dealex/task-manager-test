@@ -1,14 +1,9 @@
 import { baseApi } from '@shared/api/baseApi'
-import { Task } from '../model/types'
+import { Task, TaskQueryParams } from '../model/types'
 
 export const taskApi = {
-	getTasks: async (params?: {
-		status?: string
-		search?: string
-		sortBy?: string
-		order?: 'asc' | 'desc'
-	}) => {
-		const cleanParams: Record<string, string> = {}
+	getTasks: async (params?: TaskQueryParams) => {
+		const cleanParams: Record<string, string | number> = {}
 
 		if (params?.status && params.status !== 'all') {
 			cleanParams.status = params.status
@@ -22,6 +17,9 @@ export const taskApi = {
 			cleanParams.sortBy = params.sortBy
 			cleanParams.order = params.order || 'desc'
 		}
+
+		if (params?.page) cleanParams.page = params.page
+		if (params?.limit) cleanParams.limit = params.limit
 
 		const response = await baseApi.get<Task[]>('/tasks', {
 			params: cleanParams,

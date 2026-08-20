@@ -34,7 +34,7 @@ export const MainPage: React.FC = () => {
 		}
 
 		if (filters.search.trim()) {
-			params.title_like = filters.search.trim()
+			params.title = filters.search.trim()
 		}
 
 		return params

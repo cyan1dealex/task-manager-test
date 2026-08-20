@@ -12,10 +12,11 @@ export interface Task {
 }
 
 export interface TaskQueryParams {
-	status?: TaskStatus
-	title_like?: string
-	_page?: number
-	_limit?: number
-	_sort?: string
-	_order?: 'asc' | 'desc'
+	status?: TaskStatus | 'all'
+	search?: string
+	title?: string
+	sortBy?: string
+	order?: 'asc' | 'desc'
+	page?: number
+	limit?: number
 }
