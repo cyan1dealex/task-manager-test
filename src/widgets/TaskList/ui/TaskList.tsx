@@ -1,5 +1,5 @@
 import React from 'react'
-import { Task, TaskCard } from '@entities/Task'
+import { Task, TaskCard, TaskCardSkeleton } from '@entities/Task'
 import { ToggleTaskCheckbox } from '@features/ToggleTask'
 import { DeleteTaskButton } from '@features/DeleteTask'
 import { EditTaskModal } from '@features/EditTask'
@@ -19,7 +19,13 @@ export const TaskList: React.FC<TaskListProps> = ({
 	error,
 }) => {
 	if (isLoading) {
-		return <div className={styles.loadingState}>Загрузка...</div>
+		return (
+			<div className={styles.list}>
+				{Array.from({ length: 5 }).map((_, index) => (
+					<TaskCardSkeleton key={index} />
+				))}
+			</div>
+		)
 	}
 
 	if (isError) {

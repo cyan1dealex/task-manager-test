@@ -51,24 +51,26 @@ export const TaskCreateForm: React.FC = () => {
 				disabled={isPending}
 			/>
 
-			<select
-				className={styles.select}
-				value={priority}
-				onChange={e => setPriority(e.target.value as TaskPriority)}
-				disabled={isPending}
-			>
-				<option value='low'>Low</option>
-				<option value='medium'>Medium</option>
-				<option value='high'>High</option>
-			</select>
+			<div className={styles.right}>
+				<select
+					className={styles.select}
+					value={priority}
+					onChange={e => setPriority(e.target.value as TaskPriority)}
+					disabled={isPending}
+				>
+					<option value='low'>Low</option>
+					<option value='medium'>Medium</option>
+					<option value='high'>High</option>
+				</select>
 
-			<button
-				type='submit'
-				className={styles.button}
-				disabled={isPending || !title.trim()}
-			>
-				{isPending ? 'Добавление...' : 'Добавить +'}
-			</button>
+				<button
+					type='submit'
+					className={styles.button}
+					disabled={isPending || !title.trim()}
+				>
+					{isPending ? 'Добавление...' : 'Добавить +'}
+				</button>
+			</div>
 		</form>
 	)
 }
