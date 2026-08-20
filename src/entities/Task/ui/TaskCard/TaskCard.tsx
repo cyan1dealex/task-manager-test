@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Task } from '../../model/types'
 import styles from './TaskCard.module.css'
 
@@ -13,7 +14,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 	checkboxSlot,
 	actionsSlot,
 }) => {
-	const isDone = task.status === 'done'
+	const navigate = useNavigate()
+
+	const handleCardClick = () => {
+		navigate(`/tasks/${task.id}`)
+	}
 
 	const priorityClass = {
 		high: styles.priorityHigh,
@@ -22,22 +27,26 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 	}[task.priority]
 
 	return (
-		<article className={`${styles.card} ${isDone ? styles.cardDone : ''}`}>
-			<div className={styles.left}>
-				{checkboxSlot && (
-					<div className={styles.checkboxContainer}>{checkboxSlot}</div>
-				)}
-				<div className={styles.content}>
-					<h3 className={`${styles.title} ${isDone ? styles.titleDone : ''}`}>
-						{task.title}
-					</h3>
-					{task.description && (
-						<p className={styles.description}>{task.description}</p>
-					)}
-				</div>
+		<div className={styles.card} onClick={handleCardClick}>
+			<div
+				className={styles.checkboxWrapper}
+				onClick={e => e.stopPropagation()}
+			>
+				{checkboxSlot}
 			</div>
 
-			<div className={styles.right}>
+			<div className={styles.content}>
+				<h3
+					className={`${styles.title} ${task.status === 'done' ? styles.done : ''}`}
+				>
+					{task.title}
+				</h3>
+				{task.description && (
+					<p className={styles.description}>{task.description}</p>
+				)}
+			</div>
+
+			<div className={styles.right} onClick={e => e.stopPropagation()}>
 				<span className={`${styles.priorityBadge} ${priorityClass}`}>
 					{task.priority}
 				</span>
@@ -51,6 +60,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
 				{actionsSlot && <div className={styles.actions}>{actionsSlot}</div>}
 			</div>
-		</article>
+		</div>
 	)
 }

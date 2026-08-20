@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { createPortal } from 'react-dom'
-import { Task, TaskPriority } from '@entities/Task'
+import { Task, TaskPriority, TaskStatus } from '@entities/Task'
 import { useUpdateTask } from '../model/useUpdateTask'
 import styles from './EditTaskModal.module.css'
+import { createPortal } from 'react-dom'
 
 interface EditTaskModalProps {
 	task: Task
@@ -11,24 +11,24 @@ interface EditTaskModalProps {
 export const EditTaskModal: React.FC<EditTaskModalProps> = ({ task }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [title, setTitle] = useState(task.title)
-	const [description, setDescription] = useState(task.description)
+	const [description, setDescription] = useState(task.description || '')
 	const [priority, setPriority] = useState<TaskPriority>(task.priority)
+	const [status, setStatus] = useState<TaskStatus>(task.status)
 
-	const { mutate: updateTask, isPending } = useUpdateTask()
+	const { mutate: editTask, isPending } = useUpdateTask()
 
-	const handleSave = (e: React.FormEvent) => {
+	const handleSubmit = (e: React.SubmitEvent) => {
 		e.preventDefault()
 		const trimmedTitle = title.trim()
-		if (!trimmedTitle) return
+		if (!trimmedTitle || isPending) return
 
-		updateTask(
+		editTask(
 			{
-				id: task.id,
-				updates: {
-					title: trimmedTitle,
-					description: description.trim(),
-					priority,
-				},
+				...task,
+				title: trimmedTitle,
+				description: description.trim(),
+				priority,
+				status,
 			},
 			{
 				onSuccess: () => setIsOpen(false),
@@ -40,10 +40,9 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ task }) => {
 		<>
 			<button
 				type='button'
-				className={styles.triggerButton}
+				className={styles.editButton}
 				onClick={() => setIsOpen(true)}
 				title='Редактировать задачу'
-				aria-label='Редактировать задачу'
 			>
 				<svg
 					width='16'
@@ -65,24 +64,15 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ task }) => {
 				createPortal(
 					<div className={styles.overlay} onClick={() => setIsOpen(false)}>
 						<div className={styles.modal} onClick={e => e.stopPropagation()}>
-							<div className={styles.header}>
-								<h2 className={styles.title}>Редактировать задачу</h2>
-								<button
-									type='button'
-									className={styles.closeButton}
-									onClick={() => setIsOpen(false)}
-								>
-									✕
-								</button>
-							</div>
+							<h2 className={styles.modalTitle}>Редактирование задачи</h2>
 
-							<form className={styles.form} onSubmit={handleSave}>
+							<form onSubmit={handleSubmit} className={styles.form}>
 								<input
 									type='text'
 									className={styles.input}
 									value={title}
 									onChange={e => setTitle(e.target.value)}
-									placeholder='Заголовок задачи'
+									placeholder='Название задачи'
 									required
 								/>
 
@@ -91,29 +81,50 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ task }) => {
 									value={description}
 									onChange={e => setDescription(e.target.value)}
 									placeholder='Описание задачи...'
+									rows={4}
 								/>
 
-								<select
-									className={styles.select}
-									value={priority}
-									onChange={e => setPriority(e.target.value as TaskPriority)}
-								>
-									<option value='low'>Low</option>
-									<option value='medium'>Medium</option>
-									<option value='high'>High</option>
-								</select>
+								<div className={styles.selectsRow}>
+									<div className={styles.field}>
+										<label className={styles.label}>Статус:</label>
+										<select
+											className={`${styles.select} ${styles[`status_${status}`]}`}
+											value={status}
+											onChange={e => setStatus(e.target.value as TaskStatus)}
+										>
+											<option value='todo'>К выполнению</option>
+											<option value='in_progress'>В процессе</option>
+											<option value='done'>Выполнено</option>
+										</select>
+									</div>
+
+									<div className={styles.field}>
+										<label className={styles.label}>Приоритет:</label>
+										<select
+											className={`${styles.select} ${styles[`priority_${priority}`]}`}
+											value={priority}
+											onChange={e =>
+												setPriority(e.target.value as TaskPriority)
+											}
+										>
+											<option value='low'>Low</option>
+											<option value='medium'>Medium</option>
+											<option value='high'>High</option>
+										</select>
+									</div>
+								</div>
 
 								<div className={styles.actions}>
 									<button
 										type='button'
-										className={styles.cancelButton}
+										className={styles.cancelBtn}
 										onClick={() => setIsOpen(false)}
 									>
-										Отменить
+										Отмена
 									</button>
 									<button
 										type='submit'
-										className={styles.saveButton}
+										className={styles.saveBtn}
 										disabled={isPending || !title.trim()}
 									>
 										{isPending ? 'Сохранение...' : 'Сохранить'}

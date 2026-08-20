@@ -13,6 +13,11 @@ export const taskApi = {
 		return response.data
 	},
 
+	getTaskById: async (id: string): Promise<Task> => {
+		const response = await baseApi.get<Task>(`/tasks/${id}`)
+		return response.data
+	},
+
 	createTask: async (task: Omit<Task, 'id' | 'createdAt'>): Promise<Task> => {
 		const response = await baseApi.post<Task>('/tasks', {
 			...task,

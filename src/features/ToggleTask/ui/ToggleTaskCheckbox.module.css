@@ -1,27 +1,63 @@
-.checkbox {
-	width: 20px;
-	height: 20px;
-	border-radius: var(--border-radius-full);
-	border: 2px solid var(--color-border);
+.button {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	border: 2px solid var(--color-border, #cbd5e1);
 	background-color: transparent;
-	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: all var(--transition-duration) ease;
+	cursor: pointer;
+	padding: 0;
+	transition: all 0.2s ease;
+	flex-shrink: 0;
 }
 
-.checkbox:hover {
-	border-color: var(--color-accent);
+.button:hover:not(:disabled) {
+	border-color: var(--color-accent, #3b82f6);
 }
 
-.checkboxChecked {
-	background-color: var(--color-accent);
-	border-color: var(--color-accent);
+.button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
-.icon {
-	width: 12px;
-	height: 12px;
+.todo {
+	border-color: #9ca3af;
+}
+
+.dot {
+	display: none;
+}
+
+.button.todo:hover .dot {
+	display: block;
+	width: 6px;
+	height: 6px;
+	background-color: #9ca3af;
+	border-radius: 50%;
+}
+
+.in_progress {
+	border-color: #3b82f6;
+	background-color: #eff6ff;
+	color: #3b82f6;
+}
+
+.halfDot {
+	font-size: 14px;
+	line-height: 1;
+	font-weight: 700;
+}
+
+.done {
+	border-color: #22c55e;
+	background-color: #22c55e;
 	color: #ffffff;
+}
+
+.check {
+	font-size: 13px;
+	line-height: 1;
+	font-weight: 700;
 }

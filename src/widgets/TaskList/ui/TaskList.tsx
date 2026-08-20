@@ -48,10 +48,10 @@ export const TaskList: React.FC<TaskListProps> = ({
 					task={task}
 					checkboxSlot={<ToggleTaskCheckbox task={task} />}
 					actionsSlot={
-						<div className={styles.actions}>
+						<>
 							<EditTaskModal task={task} />
 							<DeleteTaskButton taskId={task.id} />
-						</div>
+						</>
 					}
 				/>
 			))}

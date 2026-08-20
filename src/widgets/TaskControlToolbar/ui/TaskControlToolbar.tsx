@@ -86,7 +86,14 @@ export const TaskControlToolbar: React.FC<TaskControlToolbarProps> = ({
 					className={`${styles.filterTab} ${filters.status === 'todo' ? styles.filterTabActive : ''}`}
 					onClick={() => handleStatusChange('todo')}
 				>
-					В работе
+					К выполнению
+				</button>
+				<button
+					type='button'
+					className={`${styles.filterTab} ${filters.status === 'in_progress' ? styles.filterTabActive : ''}`}
+					onClick={() => handleStatusChange('in_progress')}
+				>
+					В процессе
 				</button>
 				<button
 					type='button'

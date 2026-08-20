@@ -4,15 +4,21 @@ import styles from './DeleteTaskButton.module.css'
 
 interface DeleteTaskButtonProps {
 	taskId: string
+	onSuccessCallback?: () => void
 }
 
 export const DeleteTaskButton: React.FC<DeleteTaskButtonProps> = ({
 	taskId,
+	onSuccessCallback,
 }) => {
 	const { mutate: deleteTask, isPending } = useDeleteTask()
 
 	const handleDelete = () => {
-		deleteTask(taskId)
+		deleteTask(taskId, {
+			onSuccess: () => {
+				onSuccessCallback?.()
+			},
+		})
 	}
 
 	return (

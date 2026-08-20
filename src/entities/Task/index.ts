@@ -1,5 +1,6 @@
 export * from './model/types'
 export { taskApi } from './api/taskApi'
-export { useTasksQuery, TASK_QUERY_KEYS } from './model/useTaskQuery'
+export { useTasksQuery, TASK_QUERY_KEYS } from './model/useTasksQuery'
+export { useTaskDetailsQuery } from './model/useTaskDetailsQuery'
 export { TaskCard } from './ui/TaskCard/TaskCard'
 export { TaskCardSkeleton } from './ui/TaskCardSkeleton/TaskCardSkeleton'

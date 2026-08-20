@@ -1,5 +1,5 @@
 import React from 'react'
-import { Task } from '@entities/Task'
+import { Task, TaskStatus } from '@entities/Task'
 import { useToggleTask } from '../model/useToggleTask'
 import styles from './ToggleTaskCheckbox.module.css'
 
@@ -7,41 +7,41 @@ interface ToggleTaskCheckboxProps {
 	task: Task
 }
 
+const NEXT_STATUS: Record<TaskStatus, TaskStatus> = {
+	todo: 'in_progress',
+	in_progress: 'done',
+	done: 'todo',
+}
+
 export const ToggleTaskCheckbox: React.FC<ToggleTaskCheckboxProps> = ({
 	task,
 }) => {
-	const { mutate: toggleStatus, isPending } = useToggleTask()
-	const isDone = task.status === 'done'
+	const { mutate: updateTask, isPending } = useToggleTask()
 
-	const handleClick = () => {
-		toggleStatus({ id: task.id, currentStatus: task.status })
+	const handleClick = (e: React.MouseEvent) => {
+		e.stopPropagation()
+		if (isPending) return
+
+		const nextStatus = NEXT_STATUS[task.status]
+
+		updateTask({
+			...task,
+			status: nextStatus,
+		})
 	}
 
 	return (
 		<button
 			type='button'
-			className={`${styles.checkbox} ${isDone ? styles.checkboxChecked : ''}`}
+			className={`${styles.button} ${styles[task.status]}`}
 			onClick={handleClick}
 			disabled={isPending}
-			aria-label={
-				isDone ? 'Отметить как невыполненную' : 'Отметить как выполненную'
-			}
 		>
-			{isDone && (
-				<svg
-					className={styles.icon}
-					fill='none'
-					viewBox='0 0 24 24'
-					stroke='currentColor'
-					strokeWidth={3}
-				>
-					<path
-						strokeLinecap='round'
-						strokeLinejoin='round'
-						d='M5 13l4 4L19 7'
-					/>
-				</svg>
+			{task.status === 'todo' && <span className={styles.dot} />}
+			{task.status === 'in_progress' && (
+				<span className={styles.halfDot}>◐</span>
 			)}
+			{task.status === 'done' && <span className={styles.check}>✓</span>}
 		</button>
 	)
 }
