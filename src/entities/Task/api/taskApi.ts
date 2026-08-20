@@ -11,8 +11,9 @@ export const taskApi = {
 				cleanParams.status = params.status
 			}
 
-			if (params?.search && params.search.trim() !== '') {
-				cleanParams.title = params.search.trim()
+			const query = params?.search?.trim() || params?.title?.trim()
+			if (query) {
+				cleanParams.search = query
 			}
 
 			if (params?.sortBy) {
