@@ -42,7 +42,7 @@ export const taskApi = {
 	},
 
 	updateTask: async (id: string, updates: Partial<Task>): Promise<Task> => {
-		const response = await baseApi.patch<Task>(`/tasks/${id}`, updates)
+		const response = await baseApi.put<Task>(`/tasks/${id}`, updates)
 		return response.data
 	},
 
